@@ -1,17 +1,17 @@
 diff --git a/numpy/core/code_generators/generate_umath.py b/numpy/core/code_generators/generate_umath.py
-index af058b4be..ac52a7881 100644
+index 632bcb4..c1e0dd5 100644
 --- a/numpy/core/code_generators/generate_umath.py
 +++ b/numpy/core/code_generators/generate_umath.py
-@@ -974,6 +974,7 @@ def make_arrays(funcdict):
+@@ -970,6 +970,7 @@ def make_arrays(funcdict):
                  funclist.append('%s_%s' % (tname, name))
                  if t.simd is not None:
                      for vt in t.simd:
 +                        continue
-                         code2list.append("""\
- #ifdef HAVE_ATTRIBUTE_TARGET_{ISA}
- if (NPY_CPU_SUPPORTS_{ISA}) {{
+                         code2list.append(textwrap.dedent("""\
+                         #ifdef HAVE_ATTRIBUTE_TARGET_{ISA}
+                         if (npy_cpu_supports("{isa}")) {{
 diff --git a/numpy/distutils/ccompiler.py b/numpy/distutils/ccompiler.py
-index bbc3923bd..79e6e942b 100644
+index b03fb96..f9e6cd0 100644
 --- a/numpy/distutils/ccompiler.py
 +++ b/numpy/distutils/ccompiler.py
 @@ -275,6 +275,7 @@ def CCompiler_compile(self, sources, output_dir=None, macros=None,
@@ -23,7 +23,7 @@ index bbc3923bd..79e6e942b 100644
      if extra_postargs:
          display += "\nextra options: '%s'" % (' '.join(extra_postargs))
 diff --git a/numpy/distutils/unixccompiler.py b/numpy/distutils/unixccompiler.py
-index 6ed5eec6f..39ba7b662 100644
+index 11b2cce..f6dde79 100644
 --- a/numpy/distutils/unixccompiler.py
 +++ b/numpy/distutils/unixccompiler.py
 @@ -54,6 +54,7 @@ def UnixCCompiler__compile(self, obj, src, ext, cc_args, extra_postargs, pp_opts
@@ -34,7 +34,7 @@ index 6ed5eec6f..39ba7b662 100644
          self.spawn(self.compiler_so + cc_args + [src, '-o', obj] + deps +
                     extra_postargs, display = display)
      except DistutilsExecError:
-@@ -110,6 +111,7 @@ def UnixCCompiler_create_static_lib(self, objects, output_libname,
+@@ -111,6 +112,7 @@ def UnixCCompiler_create_static_lib(self, objects, output_libname,
          while tmp_objects:
              objects = tmp_objects[:50]
              tmp_objects = tmp_objects[50:]
