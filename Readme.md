@@ -1,3 +1,10 @@
+# Update
+
+Note: Since this recipe is now merged upstrean (https://github.com/kivy/python-for-android/pull/1343), this repository has become obsolete. You can just do `pip install --user -U git+https://github.com/kivy/python-for-android.git` in order to install the latest development version of python-for-android.
+
+
+# Old Instructions
+
 This is a minimal example of how to get numpy working under Android with p4a and python 3.6.
 
 Suppose you have a directory called 'Android' under $HOME where your Android SDK and NDK as well as the crystax NDK lives. You can build the APK with:
